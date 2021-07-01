@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs'); %>
+    <link rel="stylesheet" href="css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs'); %>
+
+    <main>
+        <% if (products.length > 0) { %>
+            <div class="grid">
+                <% products.forEach(prod => { %>
+                    <article class="card product-item">
+                        <header class="card_header">
+                            <h1 class="product__title"><%= prod.title %></h1>
+                        </header>
+                        <div class="card__image">
+                            <img src="https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", alt="A ship">
+                        </div>
+                        <div class="card__content"><h2 class="product__price"></h2>
+                        <p class="product__description">$19.99</p></div>
+                        <div class="card__actions">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit laboriosam veritatis consequatur corrupti eum tempore ratione dolorem vitae molestiae numquam.</div>
+                    </article>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <h1>No Products available</h1>
+        <% } %>
+    </main>
+
+<%- include('../includes/end.ejs'); %>
