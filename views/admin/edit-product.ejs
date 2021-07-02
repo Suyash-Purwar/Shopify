@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/nav.ejs') %>
+
+    <% let routeEndpoint, buttonText, title, imgUrl, price, desc, id; %>
+    <% if (editing) { %>
+        <% routeEndpoint = 'edit-product'; buttonText = 'Update Product' %>
+        <% title = product.title; imgUrl = product.imageUrl; price = product.price; %>
+        <% desc = product.description; id = product.id %>
+    <% } else { %>
+            <% routeEndpoint = 'add-product'; buttonText = 'Add Product' %>
+            <% title = imgUrl = price = desc = id = '' %>
+    <% } %>
+
+    <main>
+        <form class="product-form" action="/admin/<%= routeEndpoint %>" method="POST">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="<%= title %>">
+            </div>
+            <div class="form-control">
+                <label for="imageUrl">Image URL</label>
+                <input type="text" name="imageUrl" id="imageUrl" value="<%= imgUrl %>">
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" step="0.01" value="<%= price %>">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="5"><%= desc %></textarea>
+            </div>
+            <input type="hidden" name="productId" value="<%= id %>">
+
+            <button class="btn" type="submit"><%= buttonText %></button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
