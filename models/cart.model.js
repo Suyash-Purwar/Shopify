@@ -35,6 +35,10 @@ module.exports = class Cart {
             let updatedCartProducts = [];
             let updatedTotalPrice;
 
+            const cartProductExists = cart.products.find(p => p.id === id);
+            if (!cartProductExists) {
+                return;
+            }
             cart.products.forEach(p => {
                 if (p.id !== id) {
                     updatedCartProducts.push(p);
@@ -51,6 +55,17 @@ module.exports = class Cart {
             fs.writeFile(p, JSON.stringify(cart), err => {
                 console.log(err);
             });
+        });
+    }
+
+    static getCart(cb) {
+        fs.readFile(p, (err, contentFile) => {
+            if (err) {
+                cb([]);
+            } else {
+                const cart = JSON.parse(contentFile)
+                cb(cart);
+            }
         });
     }
 }
